@@ -1,6 +1,6 @@
 <h1 mat-dialog-title> User :: <strong>{{action}}</strong></h1>
 <div mat-dialog-content>
-  <form novalidate [formGroup]="newUserForm" >
+  <form novalidate  [formGroup]="newUserForm" >
 
   <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
 
@@ -52,6 +52,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [disabled]="action != 'Delete' && newUserForm.invalid  " (click)="doAction()">{{action}}</button>
+<!--  <button mat-button [disabled]="action != 'Delete' && newUserForm.invalid  " (click)="doAction()">{{action}}</button>-->
+    <button mat-button [disabled]="(action != 'Delete'&& localData.hobby === undefined)" (click)="doAction()">{{action}}</button>
+
   <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
 </div>

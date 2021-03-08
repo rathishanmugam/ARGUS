@@ -43,6 +43,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   public count: number;
   dataSource;
   public loading: boolean;
+  public disabled: boolean;
+
   users: User[];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
