@@ -1,0 +1,35 @@
+version: '3.7' # specify docker-compose version
+# Define the services/containers to be run
+services:
+  angular: # name of the first service
+    build: client # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" # specify port forewarding
+    volumes:
+      - ./client:/app
+    depends_on:
+      - express
+    networks:
+        - app-network
+  express: #name of the second service
+    build: server # specify the directory of the Dockerfile
+    ports:
+      - "8081:8081" #specify ports forewarding
+    volumes:
+      - ./server:/usr/src/app
+    depends_on:
+      - database
+    networks:
+        - app-network
+  database: # name of the third service
+    image: mongo # specify image to build container from
+    ports:
+      - "27017:27017" # specify port forewarding
+    volumes:
+      - /var/lib/docker/volumes/mongodbuser/_data:/data/db  # volume mounting path from docker host to docker mongo container
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+

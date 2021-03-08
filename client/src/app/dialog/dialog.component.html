@@ -1,0 +1,57 @@
+<h1 mat-dialog-title> User :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <form novalidate [formGroup]="newUserForm" >
+
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+
+      <input matInput placeholder="first" type="text" [(ngModel)]="localData.first" formControlName="first"   class="form-control" name="first">
+      <mat-error *ngIf="hasError('first', 'required')">first is required</mat-error>
+    <mat-error *ngIf="hasError('first', 'pattern')">Must Be Characters</mat-error>
+
+  </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete'; ">
+
+      <input matInput placeholder="last" type="text" [(ngModel)]="localData.last" formControlName="last"   class="form-control" name="last">
+      <mat-error *ngIf="hasError('last', 'required')">last is required</mat-error>
+      <mat-error *ngIf="hasError('last', 'pattern')">Must Be Characters</mat-error>
+
+
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete'; ">
+
+      <input matInput placeholder="email" type="text"   [(ngModel)]="localData.email" formControlName="email"  class="form-control" name="email">
+      <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+      <mat-error *ngIf="hasError('email', 'pattern')">Not a Valid email</mat-error>
+
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete'; ">
+      <input matInput placeholder="phone" type="text" [(ngModel)]="localData.phone" formControlName="phone"   class="form-control" name="phone">
+      <mat-error *ngIf="hasError('phone', 'required')">phone is required</mat-error>
+      <mat-error *ngIf="hasError('phone','pattern')">  Format must be (xxx) xxx-xxxx</mat-error>
+
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete'; ">
+      <input matInput placeholder="location" type="text" [(ngModel)]="localData.location" formControlName="location"   class="form-control" name="location">
+      <mat-error *ngIf="hasError('location', 'required')">location is required</mat-error>
+      <mat-error *ngIf="hasError('location', 'pattern')">Must Be Characters</mat-error>
+
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete'; ">
+
+      <input matInput placeholder="hobby" type="text" [(ngModel)]="localData.hobby" formControlName="hobby"   class="form-control" name="hobby">
+      <mat-error *ngIf="hasError('hobby', 'required')">hobby is required</mat-error>
+      <mat-error *ngIf="hasError('hobby', 'pattern')">Must Be Characters</mat-error>
+
+
+    </mat-form-field>
+
+<ng-template #elseTemplate>
+  Sure to delete <b>{{localData.first}}</b>?
+</ng-template>
+</form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [disabled]="action != 'Delete' && newUserForm.invalid  " (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
